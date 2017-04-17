@@ -1,15 +1,18 @@
 import json
 import sys
+import os
 
 
 def load_data(filepath):
-    fdata = open(filepath, 'r')
-    return fdata.read().strip()
+    if not os.path.exists(filepath):
+        return None
+
+    with open(filepath, 'r') as fdata:
+        return json.load(fdata)
 
 
 def pretty_print_json(data):
-    json_data = json.loads(data)
-    print(json.dumps(json_data, indent=4))
+    print(json.dumps(data, indent=4))
 
 
 if __name__ == '__main__':
